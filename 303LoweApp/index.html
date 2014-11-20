@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" ng-app="LoweApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Customer Transactions</title>
+    <link rel="stylesheet" href="../css/app.css">
+    <script src="../scripts/angular.min.js"></script>
+    <script src="../scripts/app/customerCtrl.js"></script>
+    <script src="../scripts/app/statusFilter.js"></script>
+  </head>
+  <body ng-controller="CustomerCtrl">
+
+    <div>
+      <span>Customer: </span>
+      <select ng-model="currentCustomer" 
+              ng-options="c.name for c in customers"
+              ng-change="downloadCustomerTransactions()"></select>
+    </div>
+
+    <div>
+        <span>Total number of transactions: {{currentCustomerTransactions.length}}</span>
+    </div>
+
+    <div class="CSSTableGenerator">
+      <table>
+        <tr>
+          <td>Status</td>
+          <td>Created</td>
+          <td>Modified</td>
+        </tr>
+        <tr ng-repeat="tr in currentCustomerTransactions">
+          <td>{{tr.statusId | status}}</td>
+          <td>{{tr.createDate | date:'MMM d, y'}}</td>
+          <td>{{tr.modifiedDate | date:'MMM d, y'}}</td>
+        </tr>
+      </table>
+    </div>
+
+  </body>
+</html>

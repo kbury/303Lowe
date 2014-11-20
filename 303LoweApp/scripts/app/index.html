@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" ng-app="LoweApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Customer Transactions</title>
+    <link rel="stylesheet" href="app.css">
+    <script src="../angular.min.js"></script>
+    <script src="customerCtrl.js"></script>
+  </head>
+  <body ng-controller="CustomerCtrl">
+
+    <div>
+      <p>Customer:</p>
+      <select ng-model="currentCustomer" 
+              ng-options="c.name for c in customers"
+              ng-change="downloadCustomerTransactions()"></select>
+    </div>
+
+    <p>Total number of transactions: {{currentCustomerTransactions.length}}</p>
+
+    <div class="CSSTableGenerator">
+      <table>
+        <tr>
+          <td>Status ID</td>
+          <td>Created</td>
+          <td>Modified</td>
+        </tr>
+        <tr ng-repeat="tr in currentCustomerTransactions">
+          <td>{{tr.statusId}}</td>
+          <td>{{tr.createDate}}</td>
+          <td>{{tr.modifiedDate}}</td>
+        </tr>
+      </table>
+    </div>
+
+  </body>
+</html>
